@@ -15,9 +15,53 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @yield('style')
+
+    <style>
+        .item {
+            background-color: #cef0f1;
+            width: 100%;
+            height: 100px;
+            padding: 5px;
+            padding-right: 1px;
+            border-radius: 10px;
+            box-shadow: 0 0 6px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+        }
+
+        .icons div {
+            display: inline-block;
+        }
+
+        .done-task, .close-task {
+            float: right;
+            margin-top: 16px;
+        }
+
+        .main-info {
+            width: 70%;
+            font-size: 18px;
+        }
+
+        .title, .category, .description {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            margin-bottom: -7px;
+        }
+
+        .icon-close-task button {
+            border: none;
+            background: none;
+            padding: 0px;
+        }
+
+    </style>
 </head>
 <body>
     <div id="app">
@@ -45,7 +89,7 @@
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
-                            
+
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>

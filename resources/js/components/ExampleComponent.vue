@@ -1,21 +1,39 @@
 <template>
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
-
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
+    <div class="container">
+        <div v-for="item, key in list">
+            <qwer-component :id="item.id" :index="key" @click="theParentMethod"></qwer-component>
         </div>
+    </div>
 </template>
+
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        data() {
+            return {
+                list: [
+                    {
+                        id: 1,
+                        name: 'first'
+                    },
+                    {
+                        id: 2,
+                        name: 'first'
+                    },
+                    {
+                        id: 3,
+                        name: 'first'
+                    }
+                ],
+            }
+        },
+        methods: {
+            theParentMethod(index) {
+                setTimeout(() => {
+                    console.log(index);
+                    this.$delete(this.list, index)
+                }, 1000);
+            }
         }
     }
 </script>
