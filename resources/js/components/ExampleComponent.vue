@@ -1,7 +1,8 @@
 <template>
     <div class="container">
         <div v-for="item, key in list">
-            <qwer-component :id="item.id" :index="key" @click="theParentMethod"></qwer-component>
+<!--            <qwer-component :id="item.id" :index="key" @click="theParentMethod"></qwer-component>-->
+            <qwer-component-2 :id="item.id" :index="key" @click="theParentMethod"></qwer-component-2>
         </div>
     </div>
 </template>
@@ -29,10 +30,10 @@
         },
         methods: {
             theParentMethod(index) {
-                setTimeout(() => {
-                    console.log(index);
-                    this.$delete(this.list, index)
-                }, 1000);
+                console.log(index);
+                this.$delete(this.list, index)
+
+                console.log(this.list)
             }
         }
     }

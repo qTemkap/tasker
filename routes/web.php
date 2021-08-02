@@ -21,3 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/groups', [\App\Http\Controllers\GroupController::class, 'index'])->name('groups.index');
+Route::get('/groups/{group}/tasks', [\App\Http\Controllers\TaskController::class, 'index'])->name('groups.tasks.index');
+
+

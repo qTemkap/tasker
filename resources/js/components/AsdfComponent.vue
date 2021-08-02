@@ -1,5 +1,6 @@
 <template>
-    <div v-bind:id="id" :ref="'example_'+id" class="item">
+    <transition name="fade">
+    <div v-bind:id="id" :ref="'example_'+id" class="item" v-if="show">
         <div class="icons">
             <div class="main-info">
                 <div class="title">
@@ -101,11 +102,10 @@
                     </svg>
                 </div>
             </div>
-            <transition v-on:leave="leave(elem)" v-bind:css="false">
-                <p v-if="show"></p>
-            </transition>
+
         </div>
     </div>
+    </transition>
 </template>
 
 <script>
@@ -114,47 +114,41 @@
         data() {
             return {
                 show: true,
-                ended: false,
-                elem: null,
             }
         },
-        mounted() {
-            this.elem = this.$refs["example_"+this.id];
-            console.log(this.elem);
-            console.log(this.id);
-            // console.log(this.index);
-        },
         watch: {
-            ended: function () {
-                if (this.ended != false) {
-                    this.$emit('click', this.index);
-                    this.ended = false;
-                }
+            show: function () {
+                setTimeout(() => {
+                    if (this.show == false) {
+                        this.$emit('click', this.index);
+                        this.show = true;
+                    }
+                }, 300);
             }
         },
         methods: {
-            leave: function (vm) {
-                var main = this;
-                vm.style.transformOrigin = 'left'
-                Velocity(vm, { translateX: '15px', rotateZ: '50deg' }, { duration: 600 })
-                Velocity(vm, { rotateZ: '100deg' }, { loop: 2 })
-                Velocity(vm, {
-                    rotateZ: '45deg',
-                    translateY: '30px',
-                    translateX: '30px',
-                    opacity: 0,
-                })
-                Velocity(vm, {
-                    rotateZ: 'none',
-                    translateY: 'none',
-                    translateX: 'none',
-                }, { complete: function() {
-                        main.ended = true;
-                        main.show = true;
-                        vm.style = false;
-                    }
-                })
-            }
+            // leave: function (vm) {
+            //     var main = this;
+            //     vm.style.transformOrigin = 'left'
+            //     Velocity(vm, { translateX: '15px', rotateZ: '50deg' }, { duration: 600 })
+            //     Velocity(vm, { rotateZ: '100deg' }, { loop: 2 })
+            //     Velocity(vm, {
+            //         rotateZ: '45deg',
+            //         translateY: '30px',
+            //         translateX: '30px',
+            //         opacity: 0,
+            //     })
+            //     Velocity(vm, {
+            //         rotateZ: 'none',
+            //         translateY: 'none',
+            //         translateX: 'none',
+            //     }, { complete: function() {
+            //             main.ended = true;
+            //             main.show = true;
+            //             vm.style = false;
+            //         }
+            //     })
+            // }
         }
     }
 </script>

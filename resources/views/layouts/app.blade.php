@@ -43,7 +43,7 @@
         }
 
         .main-info {
-            width: 70%;
+            width: 65%;
             font-size: 18px;
         }
 
@@ -61,13 +61,42 @@
             padding: 0px;
         }
 
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity .5s;
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+            opacity: 0;
+        }
+
+        .bounce-enter-active {
+            animation: bounce-in .5s;
+        }
+        .bounce-leave-active {
+            animation: bounce-in .5s reverse;
+        }
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        a li {
+            color: black;
+        }
+
     </style>
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('home') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -112,6 +141,10 @@
                                         @csrf
                                     </form>
                                 </div>
+
+                                <a href="{{route('groups.index')}}">
+                                    Группы
+                                </a>
                             </li>
                         @endguest
                     </ul>
