@@ -4,13 +4,13 @@
             <div class="icons">
                 <div class="main-info">
                     <div class="title">
-                        C[jlbnm d vfufpby pf gjregrfvb
+                        {{task.name}}
                     </div>
                     <div class="category">
-                        Ljvfiybt ltkf
+                        {{task.category.name}}
                     </div>
                     <div class="description">
-                        asfasfj akjsf akjsfkj asbfkj asfkj asjfnasnf jnaknf
+                        {{task.short_description}}
                     </div>
                 </div>
                 <div class="close-task">
@@ -110,7 +110,7 @@
 
 <script>
     export default {
-        props: ['index', 'id'],
+        props: ['index', 'id', 'task'],
         data() {
             return {
                 show: true,
