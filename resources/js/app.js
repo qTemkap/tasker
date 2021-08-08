@@ -24,6 +24,8 @@ Vue.component('tasks-component', require('./components/TasksComponent.vue').defa
 Vue.component('qwer-component', require('./components/QwerComponent.vue').default);
 Vue.component('qwer-component-1', require('./components/AsdfComponent.vue').default);
 Vue.component('qwer-component-2', require('./components/VouComponent.vue').default);
+Vue.component('create-group-component', require('./components/CreateGroupComponent.vue').default);
+Vue.component('task-create-component', require('./components/TaskCreateComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

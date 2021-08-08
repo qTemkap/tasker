@@ -86,7 +86,7 @@
             }
         }
 
-        a li {
+        a li, a span {
             color: black;
         }
 
