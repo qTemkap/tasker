@@ -29,6 +29,8 @@ Route::post('/groups/{group}', [\App\Http\Controllers\GroupController::class, 'u
 
 Route::get('/groups/{group}/tasks', [\App\Http\Controllers\TaskController::class, 'index'])->name('groups.tasks.index');
 Route::post('/groups/{group}/tasks', [\App\Http\Controllers\TaskController::class, 'store'])->name('groups.tasks.store');
+Route::post('/groups/{group}/categories', [\App\Http\Controllers\CategoryController::class, 'store'])->name('groups.categories.store');
+Route::post('/groups/{group}/priorities', [\App\Http\Controllers\PriorityController::class, 'store'])->name('groups.priorities.store');
 Route::get('/groups/{group}/tasks/create', [\App\Http\Controllers\TaskController::class, 'create'])->name('groups.tasks.create');
 
 

@@ -2048,15 +2048,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['urlForCreateGroup', 'group'],
+  props: ['urlForCreateGroup', 'group', 'categories', 'priorities', 'urlForPriority', 'urlForCategory'],
   data: function data() {
     return {
       namePage: 'Создание группы',
       nameBtnSave: 'Создать',
       name: '',
       countPeople: '',
-      options: false
+      prioritiesOptions: false,
+      categoriesOptions: false,
+      categoryName: '',
+      priorityName: '',
+      priorityColor: ''
     };
   },
   mounted: function mounted() {
@@ -2064,11 +2079,25 @@ __webpack_require__.r(__webpack_exports__);
       this.name = this.group.name;
       this.namePage = 'Редактирование группы';
       this.nameBtnSave = 'Сохранить';
-      this.options = true;
+      this.prioritiesOptions = true;
+      this.categoriesOptions = true;
       this.countPeople = this.group.count_people;
     }
   },
   methods: {
+    saveCategory: function saveCategory() {
+      axios.post(this.urlForCategory, {
+        name: this.categoryName
+      }).then(function (respons) {// window.location.href = respons.data;
+      });
+    },
+    savePriority: function savePriority() {
+      axios.post(this.urlForPriority, {
+        name: this.priorityName,
+        color: this.priorityColor
+      }).then(function (respons) {// window.location.href = respons.data;
+      });
+    },
     saveGroup: function saveGroup() {
       axios.post(this.urlForCreateGroup, {
         name: this.name,
@@ -38952,14 +38981,12 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _vm.options
+    _vm.prioritiesOptions
       ? _c("div", { staticClass: "options" }, [
-          _c("br"),
-          _vm._v(" "),
-          _c("br"),
+          _c("hr"),
           _vm._v(" "),
           _c("h2", { staticClass: "text-center" }, [
-            _vm._v("Значения важности")
+            _vm._v("Приоритеты для задач")
           ]),
           _vm._v(" "),
           _c("br"),
@@ -38968,8 +38995,8 @@ var render = function() {
             _c("div", { staticClass: "mb-3" }, [
               _c(
                 "label",
-                { staticClass: "form-label", attrs: { for: "groupName" } },
-                [_vm._v("Название группы")]
+                { staticClass: "form-label", attrs: { for: "priorityName" } },
+                [_vm._v("Название приоритета")]
               ),
               _vm._v(" "),
               _c("input", {
@@ -38977,19 +39004,19 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.name,
-                    expression: "name"
+                    value: _vm.priorityName,
+                    expression: "priorityName"
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", id: "groupName" },
-                domProps: { value: _vm.name },
+                attrs: { type: "text", id: "priorityName" },
+                domProps: { value: _vm.priorityName },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.name = $event.target.value
+                    _vm.priorityName = $event.target.value
                   }
                 }
               })
@@ -38998,8 +39025,8 @@ var render = function() {
             _c("div", { staticClass: "mb-3" }, [
               _c(
                 "label",
-                { staticClass: "form-label", attrs: { for: "countPeople" } },
-                [_vm._v("Количество людей в группе")]
+                { staticClass: "form-label", attrs: { for: "priorityColor" } },
+                [_vm._v("Цвет фона")]
               ),
               _vm._v(" "),
               _c("input", {
@@ -39007,19 +39034,19 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.countPeople,
-                    expression: "countPeople"
+                    value: _vm.priorityColor,
+                    expression: "priorityColor"
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", id: "countPeople" },
-                domProps: { value: _vm.countPeople },
+                attrs: { type: "text", id: "priorityColor" },
+                domProps: { value: _vm.priorityColor },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.countPeople = $event.target.value
+                    _vm.priorityColor = $event.target.value
                   }
                 }
               })
@@ -39030,7 +39057,61 @@ var render = function() {
               {
                 staticClass: "btn btn-success",
                 attrs: { type: "button" },
-                on: { click: _vm.saveGroup }
+                on: { click: _vm.savePriority }
+              },
+              [_vm._v(_vm._s(this.nameBtnSave))]
+            )
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.categoriesOptions
+      ? _c("div", { staticClass: "options" }, [
+          _c("hr"),
+          _vm._v(" "),
+          _c("h2", { staticClass: "text-center" }, [
+            _vm._v("Категории для задач")
+          ]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("form", [
+            _c("div", { staticClass: "mb-3" }, [
+              _c(
+                "label",
+                { staticClass: "form-label", attrs: { for: "categoryName" } },
+                [_vm._v("Название категории")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.categoryName,
+                    expression: "categoryName"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", id: "categoryName" },
+                domProps: { value: _vm.categoryName },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.categoryName = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                attrs: { type: "button" },
+                on: { click: _vm.saveCategory }
               },
               [_vm._v(_vm._s(this.nameBtnSave))]
             )
